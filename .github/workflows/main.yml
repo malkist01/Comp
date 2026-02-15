@@ -57,6 +57,7 @@ jobs:
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
+            ksu_patches: "MAMBOS/manager.patch"
             susfs_branch: "susfs-rksu-master"
             kernel_patches: ""
             susfsless_kernel_patches: "rksu_hook.patch"
@@ -72,21 +73,7 @@ jobs:
             folder: "KernelSU"
             branch: "master"
             kernel_patches: "scope-min-hooks-v1.6.patch"
-            ak3_suffix: "-xxKSU"
-
-          - type: SukiSU
-            ksu: true
-            repo: "malkist01/SukiSU-Ultra"
-            folder: "KernelSU"
-            branch: "debug"
-            kernel_patches: "seccomp.patch"
-            susfsless_kernel_patches: "manual_hooks.patch reboot-hook.patch"
-            susfs_kernel_patches: "susfs-2.0.0.patch"
-            extra_configs: "CONFIG_KSU=y CONFIG_KSU_DEBUG=y CONFIG_KSU_ALLOWLIST_WORKAROUND=y CONFIG_KSU_MULTI_MANAGER_SUPPORT=y CONFIG_KSU_MANUAL_SU=y CONFIG_KSU_NONE_HOOK=y CONFIG_KSU_MANUAL_SU=n CONFIG_KPM=y CONFIG_KPM=y CONFIG_ARCH_HAS_SET_MEMORY=y"
-            susfs_configs: "CONFIG_KSU_SUSFS=y CONFIG_KSU_NONE_HOOK=y"
-            susfsless_configs: "CONFIG_KSU_MANUAL_HOOK=y"
-            ak3_suffix: "-SukiSU"
-            kpm: "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux"            
+            ak3_suffix: "-xxKSU"        
 
         susfs: [false, true]
         exclude:
