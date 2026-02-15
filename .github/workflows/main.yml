@@ -78,7 +78,7 @@ jobs:
             ksu: true
             repo: "malkist01/SukiSU-Ultra"
             folder: "KernelSU"
-            branch: "builtin"
+            branch: "debug"
             kernel_patches: "seccomp.patch"
             susfsless_kernel_patches: "manual_hooks.patch reboot-hook.patch"
             susfs_kernel_patches: "susfs-2.0.0.patch"
