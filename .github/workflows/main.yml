@@ -57,7 +57,7 @@ jobs:
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
-            ksu_patches: "MAMBOS/manager.patch"
+            ksu_patches: "MAMBO/manager.patch"
             susfs_branch: "susfs-rksu-master"
             kernel_patches: ""
             susfsless_kernel_patches: "rksu_hook.patch"
