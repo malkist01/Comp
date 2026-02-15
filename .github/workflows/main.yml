@@ -54,7 +54,7 @@ jobs:
 
           - type: RKSU
             ksu: true
-            repo: "rsuntk/KernelSU"
+            repo: "malkist01/KernelSU"
             folder: "KernelSU"
             branch: "main"
             susfs_branch: "susfs-rksu-master"
