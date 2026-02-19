@@ -42,9 +42,9 @@ jobs:
 
           - type: KSUN
             ksu: true
-            repo: "KernelSU-Next/KernelSU-Next"
+            repo: "ThRE-Team/KernelSU-Next"
             folder: "KernelSU-Next"
-            branch: "legacy"
+            branch: "main"
             ksu_patches: ""
             susfs_ksu_patches: "KSUN/KSUN-SUSFS-2.0.0.patch"
             kernel_patches: "seccomp.patch scope-min-hooks-v1.6.patch"
