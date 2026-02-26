@@ -21,7 +21,7 @@ jobs:
       KERNEL_BRANCH: main
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
-      ANYKERNEL_BRANCH: https://github.com/malkist01/Anykernel2
+      ANYKERNEL_BRANCH: main
       CLANG_URL: https://gitlab.com/kei-space/clang/r547379.git
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
@@ -50,7 +50,7 @@ jobs:
     - name: Clone AnyKernel3
       run: |
         cd $KERNEL_DIR
-        git clone --depth=1 -b "$KERNEL_BRANCH" "$ANYKERNEL_REPO" AnyKernel3
+        git clone --depth=1 -b "$ANYKERNEL_BRANCH" "$ANYKERNEL_REPO" AnyKernel3
         echo "ANYKERNEL_DIR=$KERNEL_DIR/AnyKernel3" >> $GITHUB_ENV
 
     - name: Clone clang
