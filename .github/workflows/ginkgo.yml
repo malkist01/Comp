@@ -64,13 +64,6 @@ jobs:
         cd $KERNEL_DIR
         curl -LSs "$KSU_URL" | bash -s $KSU_BRANCH
 
-    - name: Generate defconfig
-      run: |
-        cd $KERNEL_DIR
-        CONFIG_NAME="vendor/ginkgo_defconfig"
-        DEFCONFIG_PATH="arch/arm64/configs/$CONFIG_NAME"
-        make O=out ARCH=arm64 "$CONFIG_NAME"
-
     - name: Build kernel
       run: |
         escape_markdown_v2() { 
@@ -121,10 +114,11 @@ jobs:
 
         export KBUILD_BUILD_USER=ivy
         export KBUILD_BUILD_HOST="$KERNEL_COMMIT_ID"
+        export CONFIG=vendor/ginkgo_configs
         export PATH="$CLANG_DIR/bin:$PATH"
         mkdir -p "$OUT_DIR"
 
-        make O="$OUT_DIR" ARCH=arm64 "$CONFIG_NAME"
+        make O="$OUT_DIR" ARCH=arm64 vendor/ginkgo_configs
         make -j$(nproc) O="$OUT_DIR" ARCH=arm64 \
           CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
           OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
