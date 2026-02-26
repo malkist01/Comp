@@ -114,11 +114,11 @@ jobs:
 
         export KBUILD_BUILD_USER=ivy
         export KBUILD_BUILD_HOST="$KERNEL_COMMIT_ID"
-        export CONFIG=vendor/ginkgo_configs
+        export CONFIG=vendor/ginkgo_config
         export PATH="$CLANG_DIR/bin:$PATH"
         mkdir -p "$OUT_DIR"
 
-        make O="$OUT_DIR" ARCH=arm64 vendor/ginkgo_configs
+        make O="$OUT_DIR" ARCH=arm64 vendor/ginkgo_config
         make -j$(nproc) O="$OUT_DIR" ARCH=arm64 \
           CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
           OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
