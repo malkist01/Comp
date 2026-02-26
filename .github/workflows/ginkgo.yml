@@ -67,8 +67,8 @@ jobs:
     - name: Generate defconfig
       run: |
         cd $KERNEL_DIR
-        CONFIG_NAME="${{ matrix.codename }}_defconfig"
-        DEFCONFIG_PATH="arch/arm64/configs/vendor/$CONFIG_NAME"
+        CONFIG_NAME="vendor/${{ matrix.codename }}_defconfig"
+        DEFCONFIG_PATH="arch/arm64/configs/$CONFIG_NAME"
         make O=out ARCH=arm64 "$CONFIG_NAME"
         mv out/.config "$DEFCONFIG_PATH"
 
