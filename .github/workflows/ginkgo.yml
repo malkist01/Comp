@@ -22,8 +22,6 @@ jobs:
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
       ANYKERNEL_BRANCH: master
-      GCC64_URL: https://github.com/greenforce-project/gcc-arm64
-      GCC32_URL: https://github.com/greenforce-project/gcc-arm
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
 
@@ -57,10 +55,8 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-        git clone --depth=1 -b main "$GCC64_URL" gcc64
-        echo "GCC64=$KERNEL_DIR/gcc64" >> $GITHUB_ENV
-        git clone --depth=1 -b main "$GCC32" gcc32
-        echo "GCC32=$KERNEL_DIR/gcc32" >> $GITHUB_ENV
+        git clone --depth=1 -b main https://github.com/greenforce-project/gcc-arm64.git gcc64
+        git clone --depth=1 -b main https://github.com/greenforce-project/gcc-arm.git gcc32
 
     - name: Set up Next
       run: |
@@ -118,7 +114,7 @@ jobs:
         export KBUILD_BUILD_USER=ivy
         export KBUILD_BUILD_HOST="$KERNEL_COMMIT_ID"
         export DEFCONFIG=vendor/ginkgo_defconfig
-        export PATH="$CLANG_DIR/bin:$PATH"
+        export PATH="$gcc64/bin:$gcc32:bin$PATH"
         mkdir -p "$OUT_DIR"
 
         make O="$OUT_DIR" ARCH=arm64 "${DEFCONFIG}"
