@@ -22,7 +22,7 @@ jobs:
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
       ANYKERNEL_BRANCH: master
-      CLANG_URL: https://gitlab.com/kei-space/clang/r547379.git
+      CLANG_URL: https://gitlab.com/Panchajanya1999/azure-clang.git
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
 
@@ -134,6 +134,7 @@ jobs:
         fi
 
         cp "$KERNEL_IMAGE" "$ANYKERNEL_DIR/Image.gz-dtb"
+        cp "$KERNEL_IMAGE" "$ANYKERNEL_DIR/dtbo.img"
         cd "$ANYKERNEL_DIR"
         zip -r9 "../$ZIP_NAME" ./* > /dev/null
         cd "$KERNEL_DIR"
