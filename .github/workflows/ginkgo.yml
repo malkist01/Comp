@@ -22,7 +22,8 @@ jobs:
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
       ANYKERNEL_BRANCH: master
-      CLANG_URL: https://github.com/greenforce-project/gcc-arm64
+      GCC64_URL: https://github.com/greenforce-project/gcc-arm64
+      GCC32_URL: https://github.com/greenforce-project/gcc-arm
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
 
@@ -56,8 +57,10 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-        git clone --depth=1 -b main "$CLANG_URL" clang
-        echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
+        git clone --depth=1 -b main "$GCC64_URL" gcc64
+        echo "GCC64=$KERNEL_DIR/gcc64" >> $GITHUB_ENV
+        git clone --depth=1 -b main "$GCC32" gcc32
+        echo "GCC32=$KERNEL_DIR/gcc32" >> $GITHUB_ENV
 
     - name: Set up Next
       run: |
@@ -120,9 +123,10 @@ jobs:
 
         make O="$OUT_DIR" ARCH=arm64 "${DEFCONFIG}"
         make -j$(nproc) O="$OUT_DIR" ARCH=arm64 \
-          CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
-          OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
-          CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+          CC=gcc \
+          CROSS_COMPILE=aarch64-linux-gnu- \
+          CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+          CROSS_COMPILE_COMPAT=arm-linux-gnueabi- \
           2>&1 | tee -a "$LOG_FILE"
 
         BUILD_RESULT=${PIPESTATUS[0]}
