@@ -22,7 +22,7 @@ jobs:
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
       ANYKERNEL_BRANCH: master
-      CLANG_URL: https://gitlab.com/Panchajanya1999/azure-clang.git
+      CLANG_URL: https://github.com/greenforce-project/gcc-arm64
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
 
@@ -56,7 +56,7 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-        git clone --depth=1 "$CLANG_URL" clang
+        git clone --depth=1 -b main "$CLANG_URL" clang
         echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
 
     - name: Set up Next
