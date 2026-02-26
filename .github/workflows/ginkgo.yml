@@ -55,6 +55,10 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
+        TC_DIR="${KERNEL_DIR}/toolchain"
+        CLANG_DIR="${TC_DIR}/clang"
+        ARCH_DIR="${TC_DIR}/aarch64-linux-android-4.9"
+        ARM_DIR="${TC_DIR}/arm-linux-androideabi-4.9"
         git clone --depth=1 -b main https://gitlab.com/Panchajanya1999/azure-clang "${CLANG_DIR}"
         git clone --depth=1 -b main https://github.com/greenforce-project/gcc-arm64 "${ARCH_DIR}"
         git clone --depth=1 -b main https://github.com/greenforce-project/gcc-arm "${ARM_DIR}"
@@ -111,13 +115,8 @@ jobs:
         echo "LOG_FILE=$LOG_FILE" >> $GITHUB_ENV
 
         send_telegram_message "🔨 Starting kernel compilation for $CODENAME on branch $KERNEL_BRANCH"
-
-        ARCH_DIR="${TC_DIR}/aarch64-linux-android-4.9"
-        ARM_DIR="${TC_DIR}/arm-linux-androideabi-4.9"
         export KBUILD_BUILD_USER=ivy
         export KBUILD_BUILD_HOST="$KERNEL_COMMIT_ID"
-        TC_DIR="${KERNEL_DIR}/toolchain"
-        CLANG_DIR="${TC_DIR}/clang"
         export DEFCONFIG=vendor/ginkgo_defconfig
         export PATH="$CLANG_DIR/bin:$ARCH_DIR/bin:$ARM_DIR/bin:$PATH"
         mkdir -p "$OUT_DIR"
