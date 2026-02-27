@@ -4,6 +4,7 @@
 rm -rf kernel
 git clone $REPO -b $BRANCH kernel
 cd kernel
+curl -LSs https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh | bash -s main
 
 clang() {
     rm -rf clang
