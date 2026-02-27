@@ -43,8 +43,8 @@ DEVICE="Xiaomi Redmi Note 8"
 export DEVICE
 CODENAME="ginkgo"
 export CODENAME
-# DEFCONFIG=""
-DEFCONFIG_DEVICE="vendor/ginkgo_defconfig"
+DEFCONFIG="vendor/ginkgo_defconfig"
+#DEFCONFIG_DEVICE="vendor/ginkgo_defconfig"
 export DEFCONFIG_DEVICE
 COMMIT_HASH=$(git rev-parse --short HEAD)
 export COMMIT_HASH
