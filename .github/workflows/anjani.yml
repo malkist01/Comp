@@ -60,7 +60,7 @@ jobs:
         run: |
           if [ "${DEVICE}" = "ginkgo" ]; then
             wget https://raw.githubusercontent.com/malkist01/Comp/main/scripts/anjani.sh
-            bash tissot_build_script.sh
+            bash anjani.sh
           elif [ "${DEVICE}" = "tissot-mainline" ]; then
             wget https://raw.githubusercontent.com/malkist01/Comp/main/scripts/tissot-mainline_build_script.sh
             bash tissot-mainline_build_script.sh
