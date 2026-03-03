@@ -30,7 +30,7 @@ jobs:
             tag: "Stable"
             defconfig: "vendor/ginkgo_defconfig"
             config: ""
-            patches_folder: "sm6125"
+            patches_folder: ""
             IN_DTBO: "out/arch/arm64/boot/dts/xiaomi/ginkgo-trinket-overlay.dtbo"
             python3_patch: true
 
