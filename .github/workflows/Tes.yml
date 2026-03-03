@@ -115,6 +115,7 @@ jobs:
         OUT_DIR=$KERNEL_DIR/out
         KERNEL_IMAGE_DIR=$OUT_DIR/arch/arm64/boot
         KERNEL_IMAGE=$KERNEL_IMAGE_DIR/Image.gz-dtb
+        DTBO_IMAGE=$KERNEL_IMAGE_DIR/dtbo.img
         CONFIG_NAME="${{ matrix.codename }}_defconfig"
         KERNEL_COMMIT_ID=$(git rev-parse --short=7 HEAD)
         ZIP_NAME="${KERNEL_NAME}_${{ matrix.codename }}-allSU-$(date +%Y%m%d)-${KERNEL_COMMIT_ID}.zip"
@@ -144,7 +145,7 @@ jobs:
         fi
 
         cp "$KERNEL_IMAGE" "$ANYKERNEL_DIR/Image.gz-dtb"
-        cp "$KERNEL_IMAGE" "$ANYKERNEL_DIR/dtbo.img"
+        cp "$DTBO_IMAGE" "$ANYKERNEL_DIR/dtbo.img"
         cd "$ANYKERNEL_DIR"
         zip -r9 "../$ZIP_NAME" ./* > /dev/null
         cd "$KERNEL_DIR"
