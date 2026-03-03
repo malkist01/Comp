@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         codename:
-          - mido
+          - ginkgo
         anykernel_branch:
           - master
 
@@ -21,11 +21,11 @@ jobs:
       CHAT_ID: -1002287610863
       KERNEL_NAME: AnjaniLaurens
       KERNEL_BRANCH: main
-      KERNEL_REPO: https://github.com/malkist/G1
-      ANYKERNEL_REPO: https://github.com/DooPrjkt/Anykernel2
+      KERNEL_REPO: https://github.com/malkist01/G1
+      ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
       CLANG_URL: https://gitlab.com/kei-space/clang/r547379.git
-      KSU_URL: https://raw.githubusercontent.com/Sorayukii/KernelSU-Next/stable/kernel/setup.sh
-      KSU_BRANCH: hookless
+      KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
+      KSU_BRANCH: main
 
     steps:
     - name: Checkout workflow repo
