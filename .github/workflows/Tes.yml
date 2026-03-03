@@ -73,7 +73,7 @@ jobs:
         echo "CONFIG_KSU=y" >> "${DEFCONFIG_PATH}"
         echo "CONFIG_KSU_TAMPER_SYSCALL_TABLE=y" >> "${DEFCONFIG_PATH}"
         echo "CONFIG_KSU_EXTRAS=y" >> "${DEFCONFIG_PATH}"
-        make O=out ARCH=arm64 "$CONFIG_NAME"
+        make O=out ARCH=arm64 vendor/"$CONFIG_NAME"
         mv out/.config "$DEFCONFIG_PATH"
 
     - name: Build kernel
@@ -128,7 +128,7 @@ jobs:
         export PATH="$CLANG_DIR/bin:$PATH"
         mkdir -p "$OUT_DIR"
 
-        make O="$OUT_DIR" ARCH=arm64 "$CONFIG_NAME"
+        make O="$OUT_DIR" ARCH=arm64 vendor/"$CONFIG_NAME"
         make -j$(nproc) O="$OUT_DIR" ARCH=arm64 \
           CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
           OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
