@@ -164,7 +164,8 @@ jobs:
         💻 Build host: Android@Phone"
         
         send_telegram_file "$ZIP_NAME"
-        send_telegram_file "$INFO"      
+        send_telegram_file "$LOG_FILE"
+        send_telegram_message "$INFO"      
         send_telegram_message "✅ Compilation completed for ${{ matrix.codename }} Flashable zip is ready."
 
     - name: Upload kernel zip artifact
