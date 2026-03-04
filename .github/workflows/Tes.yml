@@ -60,7 +60,20 @@ jobs:
         git clone --depth=1 "$CLANG_URL" clang
         echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
 
-    - name: Set up RKSU
+    - name: Cache Clang
+      uses: actions/cache@v4
+      id: cache-clang
+      with:
+       path: $KERNEL_DIR/clang
+       key: clang-r563880-ubuntu-latest
+
+    - name: Set up ccache
+      run: |
+          ccache --max-size=12G
+          ccache --set-config=compression=true
+          echo "CCACHE_DIR=$KERNEL_DIR/.ccache" >> $GITHUB_ENV       
+
+    - name: Set up KSU
       run: |
         cd $KERNEL_DIR
         curl -LSs "$KSU_URL" | bash -s $KSU_BRANCH
@@ -123,7 +136,7 @@ jobs:
         echo "LOG_FILE=$LOG_FILE" >> $GITHUB_ENV
 
         send_telegram_message "🔨 Starting kernel compilation for $CODENAME on branch $KERNEL_BRANCH"
-
+        export CCACHE_EXEC=$(which ccache)
         export KBUILD_BUILD_USER=ivy
         export KBUILD_BUILD_HOST="$KERNEL_COMMIT_ID"
         export PATH="$CLANG_DIR/bin:$PATH"
@@ -131,8 +144,7 @@ jobs:
 
         make O="$OUT_DIR" ARCH=arm64 vendor/"$CONFIG_NAME"
         make -j$(nproc) O="$OUT_DIR" ARCH=arm64 \
-          CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
-          OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
+          CC="ccache clang" \ LD=ld.lld LLVM=1 \ LLVM_IAS=1 \
           CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
           2>&1 | tee -a "$LOG_FILE"
 
