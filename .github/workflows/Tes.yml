@@ -46,15 +46,13 @@ jobs:
         cd $KERNEL_DIR
         git clone --depth=1 -b "${{ matrix.anykernel_branch }}" "$ANYKERNEL_REPO" AnyKernel3
         echo "ANYKERNEL_DIR=$KERNEL_DIR/AnyKernel3" >> $GITHUB_ENV
-        BUILD_DATETIME=$(TZ=Asia/Jakarta date +"%d %B %Y")
 
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
         git clone --depth=1 "$CLANG_URL" clang
-        TC_INFO=$(clang --version | head -n1)
         echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
-      
+
     - name: Cache Clang
       uses: actions/cache@v4
       id: cache-clang
@@ -106,18 +104,8 @@ jobs:
             curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendDocument" \
                 -F "chat_id=$CHAT_ID" \
                 -F "document=@$FILE_PATH" \
-                -F "caption=🔥 *Kernel CI Build Test Success*
-        📱 *Device* : ${codename}
-        📦 *Kernel Name* : AnjaniLaurens
-        🍃 *Kernel Version* : 4.14.356
-
-        🛠 *Toolchain* : ${TC_INFO}
-
-        ⌛ *Build Time* : ${BUILD_TIME}
-        🕒 *Build Date* : ${BUILD_DATETIME}
-
-        🔐 *MD5* : ${MD5_HASH}
-                 -F "parse_mode=MarkdownV2"
+                -F "caption=$CAPTION" \
+                -F "parse_mode=MarkdownV2"
         }
 
         stop_handler() {
@@ -136,7 +124,7 @@ jobs:
         DTBO_IMAGE=$KERNEL_IMAGE_DIR/dtbo.img
         CONFIG_NAME="${{ matrix.codename }}_defconfig"
         KERNEL_COMMIT_ID=$(git rev-parse --short=7 HEAD)
-        ZIP_NAME="${KERNEL_NAME}_${{ matrix.codename }}-$(date +%Y%m%d)-${KERNEL_COMMIT_ID}.zip"
+        ZIP_NAME="${KERNEL_NAME}_${{ matrix.codename }}-$(date +%Y%m%d).zip"
         echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
         echo "LOG_FILE=$LOG_FILE" >> $GITHUB_ENV
 
@@ -167,10 +155,16 @@ jobs:
         zip -r9 "../$ZIP_NAME" ./* > /dev/null
         cd "$KERNEL_DIR"
 
+         INFO="Build info:
+        📱 Device : ginkgo
+        📦 Kernel Name : AnjaniLaurens
+        🍃 Kernel Version : 4.14.356
+
+        🛠 Toolchain : Aosp Clang r563880
+        💻 Build host: Android@Phone"
+        
         send_telegram_file "$ZIP_NAME"
-        MD5_HASH=$(md5sum "$ZIP_NAME" | awk '{print $1}')
-        BUILD_TIME="$((DIFF / 60)) min $((DIFF % 60)) sec"
-        send_telegram_file "$LOG_FILE"
+        send_telegram_file "$INFO"      
         send_telegram_message "✅ Compilation completed for ${{ matrix.codename }} Flashable zip is ready."
 
     - name: Upload kernel zip artifact
