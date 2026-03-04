@@ -107,22 +107,17 @@ jobs:
                 -F "chat_id=$CHAT_ID" \
                 -F "document=@$FILE_PATH" \
                 -F "caption=🔥 *Kernel CI Build Test Success*
+        📱 *Device* : ${codename}
+        📦 *Kernel Name* : AnjaniLaurens
+        🍃 *Kernel Version* : 4.14.356
 
-📱 *Device* : ${codename}
-📦 *Kernel Name* : AnjaniLaurens
-🍃 *Kernel Version* : 4.14.356
+        🛠 *Toolchain* : ${TC_INFO}
 
-🛠 *Toolchain* :
-\`${TC_INFO}\`
+        ⌛ *Build Time* : ${BUILD_TIME}
+        🕒 *Build Date* : ${BUILD_DATETIME}
 
-⌛ *Build Time* : ${BUILD_TIME}
-🕒 *Build Date* : ${BUILD_DATETIME}
-
-🔐 *MD5* :
-\`${MD5_HASH}\`
-
-❓ *Need Test*" \
-                -F "parse_mode=MarkdownV2"
+        🔐 *MD5* : ${MD5_HASH}
+                 -F "parse_mode=MarkdownV2"
         }
 
         stop_handler() {
