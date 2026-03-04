@@ -23,7 +23,7 @@ jobs:
       KERNEL_BRANCH: main
       KERNEL_REPO: https://github.com/malkist01/G1
       ANYKERNEL_REPO: https://github.com/malkist01/Anykernel2
-      CLANG_URL: https://gitea.com/ihsanulrahman/aosp-clang-22.git
+      CLANG_URL: https://gitea.com/ihsanulrahman/aosp-clang-21.git
       KSU_URL: https://raw.githubusercontent.com/malkist01/SU/main/kernel/setup.sh
       KSU_BRANCH: main
 
