@@ -98,7 +98,14 @@ jobs:
         send_telegram_file() {
             local FILE_PATH="$1"
             local FILE_NAME=$(basename "$FILE_PATH")
-            local ESCAPED_NAME=$(escape_markdown_v2 "$FILE_NAME")
+            local ESCAPED_NAME=INFO="Build info:
+        📱 Device : ginkgo
+        📦 Kernel Name : AnjaniLaurens
+        🍃 Kernel Version : 4.14.356
+
+        🛠 Toolchain : Aosp Clang r563880
+        💻 Build host: Android@Phone"
+        
             local CAPTION="\`$ESCAPED_NAME\`"
 
             curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendDocument" \
