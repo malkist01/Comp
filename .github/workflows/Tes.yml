@@ -165,17 +165,7 @@ jobs:
         zip -r9 "../$ZIP_NAME" ./* > /dev/null
         cd "$KERNEL_DIR"
 
-         INFO="Build info:
-        📱 Device : ginkgo
-        📦 Kernel Name : AnjaniLaurens
-        🍃 Kernel Version : 4.14.356
-
-        🛠 Toolchain : Aosp Clang r563880
-        💻 Build host: Android@Phone"
-        
-        send_telegram_file "$ZIP_NAME"
-        send_telegram_file "$LOG_FILE"
-        send_telegram_message "$INFO"      
+        send_telegram_file "$ZIP_NAME"   
         send_telegram_message "✅ Compilation completed for ${{ matrix.codename }} Flashable zip is ready."
 
     - name: Upload kernel zip artifact
