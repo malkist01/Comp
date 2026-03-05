@@ -50,18 +50,18 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-        wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz -O clang.tar.gz
-        rm -rf clang
-        mkdir clang
-        tar -xvf clang.tar.gz -C clang
-        rm -rf clang.tar.gz
-        
+         wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz -O clang.tar.gz
+        echo "Extracting clang to ${CLANG_DIR}..."
+        tar -xf clang.tar.gz -C "${CLANG_DIR}"
+        rm -f clang.tar.gz        
+        echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
+
     - name: Cache Clang
       uses: actions/cache@v4
       id: cache-clang
       with:
        path: $KERNEL_DIR/clang
-       key: clang-r563880-ubuntu-latest
+       key: clang-r563880c-ubuntu-latest
 
     - name: Set up ccache
       run: |
@@ -189,4 +189,5 @@ jobs:
       with:
         name: build-log-${{ matrix.codename }}
         path: ${{ env.LOG_FILE }}
-        
+
+                
