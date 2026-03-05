@@ -105,12 +105,6 @@ jobs:
         📦 Kernel Name : AnjaniLaurens
         
         🍃 Kernel Version : 4.14.356
-        
-        DISTRO="$(lsb_release -d | awk -F'\t' '{print $2}')
-        PARSE_BRANCH="$(git rev-parse --abbrev-ref HEAD)
-        COMMIT_POINT="$(git rev-parse HEAD)
-        CPU_NAME="$(lscpu | grep 'Model name' | awk -F': ' '{print $2}')
-        TOTAL_RAM_GB="$(free -g | awk '/^Mem:/{print $2}')
 
         🛠 Clang version : $(clang --version 2>&1 | head -n 1)
         
