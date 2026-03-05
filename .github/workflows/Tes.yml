@@ -98,14 +98,16 @@ jobs:
         send_telegram_file() {
             local FILE_PATH="$1"
             local FILE_NAME=$(basename "$FILE_PATH")
-            local ESCAPED_NAME=INFO="Build info:
+            local ESCAPED_NAME="Build info:
+            
         📱 Device : ginkgo
         📦 Kernel Name : AnjaniLaurens
         🍃 Kernel Version : 4.14.356
 
-        🛠 Toolchain : Aosp Clang r563880
-        💻 Build host: Android@Phone"
-         📆
+        🛠 Clang version : $(clang --version 2>&1 | head -n 1)
+        ⚙️ Lld_version : $(ld.lld --version 2>&1 | head -n 1)
+        💻 Build host: Android@Phone
+        📆 Buid date : $(date +'%H%M-%d%m%y')"
         
             local CAPTION="\`$ESCAPED_NAME\`"
 
