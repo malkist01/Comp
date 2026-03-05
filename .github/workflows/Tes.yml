@@ -50,11 +50,11 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-         wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz -O clang.tar.gz
-        echo "Extracting clang to ${CLANG_DIR}..."
-        tar -xf clang.tar.gz -C "${CLANG_DIR}"
-        rm -f clang.tar.gz        
-        echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
+         wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz -O clang.tar.gz "${CLANG_DIR}"
+         echo "Extracting clang to ${CLANG_DIR}..."
+         tar -xf clang.tar.gz -C "${CLANG_DIR}"
+         rm -f clang.tar.gz        
+         echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
 
     - name: Cache Clang
       uses: actions/cache@v4
