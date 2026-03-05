@@ -105,6 +105,7 @@ jobs:
 
         🛠 Toolchain : Aosp Clang r563880
         💻 Build host: Android@Phone"
+         📆
         
             local CAPTION="\`$ESCAPED_NAME\`"
 
