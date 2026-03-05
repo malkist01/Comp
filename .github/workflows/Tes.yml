@@ -101,13 +101,18 @@ jobs:
             local ESCAPED_NAME="Build info:
             
         📱 Device : ginkgo
+        
         📦 Kernel Name : AnjaniLaurens
+        
         🍃 Kernel Version : 4.14.356
 
         🛠 Clang version : $(clang --version 2>&1 | head -n 1)
+        
         ⚙️ Lld_version : $(ld.lld --version 2>&1 | head -n 1)
+        
         💻 Build host: Android@Phone
-        📆 Buid date : $(date +'%H%M-%d%m%y')"
+        
+        📆 Build date: "$(date '+%Y-%m-%d %H:%M:%S')"
         
             local CAPTION="\`$ESCAPED_NAME\`"
 
