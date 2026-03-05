@@ -50,9 +50,12 @@ jobs:
     - name: Clone clang
       run: |
         cd $KERNEL_DIR
-        git clone --depth=1 "$CLANG_URL" clang
-        echo "CLANG_DIR=$KERNEL_DIR/clang" >> $GITHUB_ENV
-
+        wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz -O clang.tar.gz
+        rm -rf clang
+        mkdir clang
+        tar -xvf clang.tar.gz -C clang
+        rm -rf clang.tar.gz
+        
     - name: Cache Clang
       uses: actions/cache@v4
       id: cache-clang
