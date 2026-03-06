@@ -17,9 +17,9 @@ jobs:
       TZ: Asia/Jakarta
       BOT_TOKEN: 7868194496:AAGY7WwRRbeCOPYOnczoCPh2psC43Q0F3JI
       CHAT_ID: -1002287610863
-      KERNEL_VER: Wind-B1
-      KERNEL_BRANCH: wind-kernel_U
-      KERNEL_REPO: https://github.com/DooPrjkt/wind-kernel
+      KERNEL_VER: V1.0
+      KERNEL_BRANCH: 16
+      KERNEL_REPO: https://github.com/malkist01/mdo
       ANYKERNEL_REPO: https://github.com/DooPrjkt/Anykernel3
       CLANG_URL: https://gitlab.com/kei-space/clang/r547379.git
       KSU_URL: https://raw.githubusercontent.com/Sorayukii/KernelSU-Next/stable/kernel/setup.sh
