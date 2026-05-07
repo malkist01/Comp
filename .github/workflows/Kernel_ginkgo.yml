@@ -81,7 +81,7 @@ jobs:
             kernel_patches: "scope-min-hooks-v1.9.patch"
             ak3_suffix: "-xxKSU"
 
-        susfs: [false]
+        susfs: [true]
         exclude:
           - build:
               exclude: susfs
