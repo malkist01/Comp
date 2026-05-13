@@ -1,5 +1,7 @@
 name: Kernel Build Testing
 
+name: Anjani Kernel Build
+
 on:
   workflow_dispatch:
   workflow_call:
@@ -11,7 +13,8 @@ on:
       - test
       
 env:
- TZ: Asia/Jakarta
+  TZ: Asia/Jakarta
+
 jobs:
   build:
     runs-on: ubuntu-latest
