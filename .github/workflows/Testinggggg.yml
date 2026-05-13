@@ -1,4 +1,3 @@
-# Annoy Project
 name: experimental
 on:
   workflow_dispatch:
