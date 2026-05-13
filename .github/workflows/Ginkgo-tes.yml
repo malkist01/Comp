@@ -1,7 +1,5 @@
 name: Kernel Build Testing
 
-name: Anjani Kernel Build
-
 on:
   workflow_dispatch:
   workflow_call:
