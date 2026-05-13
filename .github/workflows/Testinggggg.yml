@@ -154,9 +154,6 @@ jobs:
       run: |
          if [ ${{ inputs.kernel-url }} != false ]; then
             cd kernel-dir
-            echo "CONFIG_KSU=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
-            echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
-            curl -LSs "https://raw.githubusercontent.com/JackA1ltman/NonGKI_Kernel_Build_2nd/refs/heads/mainline/Patches/syscall_hook_patches.sh" | bash -s
          fi
          if [ ${{ inputs.disable-lto }} = true ]; then
              if grep -q "LTO" "arch/arm64/configs/${{ inputs.kernel-config }}"
@@ -169,32 +166,14 @@ jobs:
          fi
     - name: Setup KernelSU
       run: |
-         if [ ${{ inputs.kernel-url }} != false ]; then
             cd kernel-dir
-         fi
-         if [ ${{ inputs.kernel-url }} == false ]; then
-            if [ ${{ inputs.kernel-branch }} != main ]; then
-               ${{ inputs.kernel-branch }}
-            fi
-         fi
-         rm -rf KernelSU
-         if [ ${{ inputs.kernelsu }} == ksu ]; then
-            curl -LSs "https://raw.githubusercontent.com/FirmanBell/KernelSU/main/kernel/setup.sh" | bash -s main
-         elif [ ${{ inputs.kernelsu }} == next ]; then
-            curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s legacy
-         elif [ ${{ inputs.kernelsu }} == hookless ]; then   
-            curl -LSs "https://raw.githubusercontent.com/FirmanBell/KernelSU-Next/stable/kernel/setup.sh" | bash -s hookless
-         elif [ ${{ inputs.kernelsu }} == enjoy ]; then
-            curl -LSs https://raw.githubusercontent.com/ThRE-Team/KernelSU-Next/main/kernel/setup.sh | bash -s v3.2.0
-         elif [ ${{ inputs.kernelsu }} == mambo ]; then
-            curl -LSs https://raw.githubusercontent.com/RapliVx/KernelSU/master/kernel/setup.sh | bash -s master
-         elif [ ${{ inputs.kernelsu }} == kowsu ]; then
-            curl -LSs https://raw.githubusercontent.com/KOWX712/KernelSU/master/kernel/setup.sh | bash -s master
-         elif [ ${{ inputs.kernelsu }} == resukisu ]; then
-            curl -LSs https://raw.githubusercontent.com/ReSukiSU/ResukiSU/main/kernel/setup.sh | bash -s main
-         elif [ ${{ inputs.kernelsu }} != false ]; then
-            ${{ inputs.kernelsu }}
-         fi
+            curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/refs/heads/main/kernel/setup.sh" | bash -s main
+            echo "CONFIG_KSU=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
+            echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
+            echo "CONFIG_KSU=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
+            echo "CONFIG_KSU=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}   
+                        echo "CONFIG_KSU=y" >> ./arch/arm64/configs/${{ inputs.kernel-config }}
+            curl -LSs "https://raw.githubusercontent.com/JackA1ltman/NonGKI_Kernel_Build_2nd/refs/heads/mainline/Patches/syscall_hook_patches.sh" | bash -s
     - name: Compile
       run: |        
          mkdir -p -v out
