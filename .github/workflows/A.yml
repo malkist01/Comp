@@ -57,8 +57,7 @@ jobs:
 
           git clone "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git" -b "android12L-release" gcc-64 --depth=1
           git clone "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9.git" -b "android12L-release" gcc-32 --depth=1
-          wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -O clang.tar.gz
-          mkdir -p clang-custom && tar -xf clang.tar.gz -C clang-custom
+          git clone "https://gitlab.com/nekoprjkt/aosp-clang" custom-clang --depth=1
 
       - name: Setup ccache
         uses: hendrikmuhs/ccache-action@v1.2
