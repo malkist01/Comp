@@ -58,9 +58,9 @@ jobs:
           git clone "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git" -b "android12L-release" gcc-64 --depth=1
           git clone "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9.git" -b "android12L-release" gcc-32 --depth=1
 
-          curl -C - --progress-bar -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.0/LLVM-20.1.0-Linux-X64.tar.xz" -o "clang-custom.tar.xz"
+          curl -C - --progress-bar -L "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/4d2864f08ff2c290563fb903a5156e0504620bbe/clang-r563880c.tar.gz" -o "clang-custom.tar.gz"
           mkdir clang-custom
-          tar -C clang-custom/ -xf clang-custom.tar.xz --strip-components 1
+          tar -C clang-custom/ -zxf clang-custom.tar.gz --strip-components 1
 
       - name: Setup ccache
         uses: hendrikmuhs/ccache-action@v1.2
