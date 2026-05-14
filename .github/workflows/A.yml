@@ -103,9 +103,8 @@ jobs:
           cd $GITHUB_WORKSPACE/device_kernel
 
           export PATH=$GITHUB_WORKSPACE/clang-custom/bin:$PATH
-          ARGS="O=out ARCH=arm64 CC=clang LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- LLVM=1 LLVM_IAS=1"      
-          make vendor/ginkgo_defconfig 2>&1 | tee defconfig.log || true
-          make -j$(nproc) $ARGS 2>&1 | tee compile.log || true
+          make O=out ARCH=arm64 vendor/ginkgo_defconfig
+          make O=out CC="ccache clang" LD=ld.lld LLVM=1 LLVM_IAS=1 -j"$(nproc --all)" CROSS_COMPILE=aarch64-linux-gnu-
 
           if [[ "${{ matrix.kpm }}" == "true" ]]; then
 
