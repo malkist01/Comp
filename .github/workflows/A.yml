@@ -106,8 +106,8 @@ jobs:
 
           export PATH=$GITHUB_WORKSPACE/clang-custom/bin:$PATH
 
-          make CC="ccache clang" O=out ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} CROSS_COMPILE=$GITHUB_WORKSPACE/gcc-64/bin/aarch64-linux-android- CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/gcc-32/bin/arm-linux-androideabi- vendor/ginkgo_defconfig
-          make -j$(nproc --all) CC="ccache clang" CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} STRIP=llvm-strip CROSS_COMPILE=$GITHUB_WORKSPACE/gcc-64/bin/aarch64-linux-android- CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/gcc-32/bin/arm-linux-androideabi- O=out ARCH=arm64 2>&1|tee error.log
+          make CC="ccache clang" O=out ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- vendor/ginkgo_defconfig
+          make -j$(nproc --all) CC="ccache clang" CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- O=out ARCH=arm64 2>&1|tee error.log
 
           if [[ "${{ matrix.kpm }}" == "true" ]]; then
 
