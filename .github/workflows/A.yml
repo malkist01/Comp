@@ -106,8 +106,8 @@ jobs:
 
           export PATH=$GITHUB_WORKSPACE/clang-custom/bin:$PATH
 
-          make CC="ccache clang" O=out ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- vendor/ginkgo_defconfig
-          make -j$(nproc --all) CC="ccache clang" CLANG_TRIPLE=aarch64-linux-gnu- BRAND_SHOW_FLAG=Xiaomi ${{ matrix.command }} STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- O=out ARCH=arm64 2>&1|tee error.log
+          make O=out ARCH=arm64 vendor/ginkgo_defconfig
+          make O=out CC="ccache clang" LD=ld.lld LLVM=1 LLVM_IAS=1 -j"$(nproc --all)" CROSS_COMPILE=aarch64-linux-gnu- 2>&1|tee error.log
 
           if [[ "${{ matrix.kpm }}" == "true" ]]; then
 
